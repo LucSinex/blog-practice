@@ -1,17 +1,24 @@
 <h1>Blogposts</h1>
 
-<table>
+<div class="row">
+	<table class="table">
+	  <thead>
+	  <tr>
+	    <th>Post</th>
+	    <th>Comment</th>
+	    <th colspan="3"></th>
+	  </tr>
+	  </thead>
+	  <%= render @posts %>
 
-  <tr>
-    <th>Post</th>
-    <th>Comment</th>
-    <th colspan="3"></th>
-  </tr>
-  
-  <%= render @posts %>
+	</table>
+</div>
 
-</table>
 
 <p>
-  <%= link_to 'Create new post', new_post_path %><br>
+  <a href = 'posts/new'>
+        <button type = "button", class = "btn btn-primary">
+        	Add Post
+        </button>
+      </a>
 </p>

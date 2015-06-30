@@ -4,24 +4,28 @@
   <%= @post.text %>
 </p>
 
-<p>
+<div class="comment-box">
   <strong>Comments:</strong> <br>
-  <table>
-    <tr>
-      <th>Author</th>
-      <th>Comment</th>
-      <th colspan="1"></th>
-    </tr>
-    <% @post.comments.each do |cmt| %>
+  <% if @post.comments.any? %>
+    <table class="table">
       <tr>
-        <td><%= cmt.author %></td>
-        <td><%= cmt.text %></td>
-        <td><%= link_to 'Delete', [cmt.post, cmt], method: :delete, data: { confirm: "Are you sure?" } %></td>
+        <th>Author</th>
+        <th>Comment</th>
+        <th colspan="1"></th>
       </tr>
-    <% end %>
-  </table>
-</p>
+      <% @post.comments.each do |cmt| %>
+        <tr>
+          <td><%= cmt.author %></td>
+          <td><%= cmt.text %></td>
+          <td><%= link_to 'Delete', [cmt.post, cmt], method: :delete, data: { confirm: "Are you sure?" } %></td>
+        </tr>
+        <% end %>
+    </table>
+  <% else %>
+      No comments found for this post. Add a comment below!    
+  <% end %>
 
+<div class="comment-add-box">
 <h4>Add a comment:</h4>
 <%= form_for [@post, @post.comments.build] do |f| %>
   <p>
@@ -36,8 +40,9 @@
     <%= f.submit %>
   </p>
 <% end %>
+</div>
+</div>
 
-
-<p>
+<p><br>
   <%= link_to 'Back', posts_path %>
 </p>
